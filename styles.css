@@ -8,7 +8,7 @@ body {
 }
 
 .main-header {
-    background-color: violet;
+    background-color: #EFAF1F;
     color: white;
     text-align: center;
     padding: 20px 0;
@@ -18,7 +18,7 @@ section {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: plum;
+    background-color: rgb(67, 106, 236);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -36,7 +36,7 @@ section ul li {
     border-bottom: 1px solid #ddd;
 }
 h1, h2, h3 {
-    color: #8a4f8a;
+    color: white;
 }
 
 p {
@@ -44,7 +44,7 @@ p {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #EFAF1F;
     color: white;
     padding: 10px 15px;
     border: none;
