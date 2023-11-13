@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title> Optimize </title>
+</head>
+<body>
+    <header class="main-header">
+        <h2>Datos del Dispositivo</h2>
+    </header>
+    <section>
+        <form id="formulario1">
+            <fieldset>
+                <legend>Configuración 1</legend>
+                <ul>
+                    <li>
+                        <label for="porcentajeRamUsuario"><strong>% de RAM utilizado:</strong></label>
+                        <input type="text" value ="0" id="porcentajeRamUsuario" inputmode="numeric" pattern="[0-9]*" placeholder="Ingrese el porcentaje de RAM">
+                    </li>
+                    <li>
+                        <label for="planEnergiaUsuario"><strong>Plan de energía actual:</strong></label>
+                        <select id="planEnergiaUsuario">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="consumoActualResultado"><strong>Consumo actual:</strong></label>
+                        <span id="consumoActualResultado">-</span>
+                    </li>
+                </ul>
+            </fieldset>
+            <button id="btn" type ="button">Calcular Consumo</button>
+
+        </form>
+        
+        <form id="formulario2">
+            <fieldset>
+                <legend>Configuración 2</legend>
+                <ul>
+                    <li>
+                        <label for="porcentajeRam2"><strong>% de RAM utilizado:</strong></label>
+                        <span id="porcentajeRam2">-</span>
+                    </li>
+                    <li>
+                        <label for="planEnergia2"><strong>Plan de energía recomendado:</strong></label>
+                        <span id="planEnergia2">-</span>
+                    </li>
+                    <li>
+                        <label for="consumoActual2"><strong>Consumo estimado:</strong></label>
+                        <span id="consumoActual2">-</span>
+                    </li>
+                </ul>
+            </fieldset>
+        </form>
+        
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script>
+        // Función para actualizar el resultado del consumo actual según el plan de energía
+        function actualizarConsumoActual() {
+            // Obtener el valor seleccionado en el plan de energía
+            var planEnergiaSeleccionado = document.getElementById("planEnergiaUsuario").value;
+        
+            // Establecer el consumo actual según el plan de energía seleccionado
+            var consumoActual;
+            switch (planEnergiaSeleccionado) {
+                case "1":
+                    consumoActual = 8.5;
+                    break;
+                case "2":
+                    consumoActual = 12;
+                    break;
+                case "3":
+                    consumoActual = 15;
+                    break;
+                default:
+                    consumoActual = 0;
+                    break;
+            }
+        
+            // Mostrar el resultado en la página
+            document.getElementById("consumoActualResultado").textContent = consumoActual.toFixed(2);
+        }
+        
+        // Llamar a la función al cargar la página
+        actualizarConsumoActual();
+        
+        // Agregar un listener para actualizar el resultado cuando cambia el plan de energía
+        document.getElementById("planEnergiaUsuario").addEventListener("change", actualizarConsumoActual);
+    </script>
+
+    <script>
+
+        var modelo =  null;
+        (async() =>{
+            console.log("Cargando el modelo ...");
+            modelo = await tf.loadLayersModel("../pagina_web/model.json");
+            console.log("Modelo cargado");
+        }
+        )();
+
+        const btn = document.getElementById("btn");
+
+        btn.onclick = () =>{
+            var porcentajeRamUsuario = document.getElementById("porcentajeRamUsuario").value;
+            var planEnergiaUsuario = document.getElementById("planEnergiaUsuario").value;
+
+            if (modelo!=null)
+            {
+                var tensor = tf.tensor2d([[parseInt(porcentajeRamUsuario), parseInt(planEnergiaUsuario)]]);
+                var prediccion = modelo.predict(tensor).dataSync();
+                prediccion = Math.round(prediccion,);
+                document.getElementById("porcentajeRam2").innerHTML = document.getElementById("porcentajeRamUsuario").value;
+                document.getElementById("planEnergia2").innerHTML = prediccion;
+                var consumoActual2;
+                switch (prediccion) {
+                    case 1:
+                        consumoActual2 = 8.5;
+                        break;
+                    case 2:
+                        consumoActual2 = 12;
+                        break;
+                    case 3:
+                        consumoActual2 = 15;
+                        break;
+                    default:
+                        consumoActual2 = 0;
+                        break;
+                }
+                document.getElementById("consumoActual2").innerHTML = consumoActual2;
+            }
+        }
+
+    </script>
+
+    
+
+        
+
+</body>
+</html>
+

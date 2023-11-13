@@ -1,0 +1,90 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #4e2a4d;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.main-header {
+    background-color: violet;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: plum;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.device-section {
+    background-color: #f8f9fa;
+}
+
+section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+section ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+h1, h2, h3 {
+    color: #8a4f8a;
+}
+
+p {
+    line-height: 1.6;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+a {
+    color: #6b3271;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.section {
+    background-color: #f8f9fa;
+    padding: 40px 0;
+}
+
+.dark-section {
+    background-color: #343a40;
+    color: white;
+}
+
+
